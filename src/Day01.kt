@@ -1,21 +1,68 @@
+import java.io.File
+
+class Day01 {
+
+    // Function to calculate the total distance (Part One)
+    fun calculateTotalDistance(fileName: String): Int {
+        val inputLines = File("src/resources/$fileName").readLines()
+
+        val leftList = mutableListOf<Int>()
+        val rightList = mutableListOf<Int>()
+
+        // Parse the input
+        for (line in inputLines) {
+            val parts = line.split("\\s+".toRegex()).map { it.toInt() }
+            if (parts.size == 2) {
+                leftList.add(parts[0])
+                rightList.add(parts[1])
+            }
+        }
+
+        // Sort both lists
+        leftList.sort()
+        rightList.sort()
+
+        // Calculate total distance
+        return leftList.indices.sumBy { index ->
+            kotlin.math.abs(leftList[index] - rightList[index])
+        }
+    }
+
+    // Function to calculate the similarity score (Part Two)
+    fun calculateSimilarityScore(fileName: String): Int {
+        val inputLines = File("src/resources/$fileName").readLines()
+
+        val leftList = mutableListOf<Int>()
+        val rightList = mutableListOf<Int>()
+
+        // Parse the input
+        for (line in inputLines) {
+            val parts = line.split("\\s+".toRegex()).map { it.toInt() }
+            if (parts.size == 2) {
+                leftList.add(parts[0])
+                rightList.add(parts[1])
+            }
+        }
+
+        // Count occurrences of each number in the right list
+        val rightFrequency = rightList.groupingBy { it }.eachCount()
+
+        // Calculate similarity score
+        return leftList.sumBy { leftNumber ->
+            val occurrences = rightFrequency.getOrDefault(leftNumber, 0)
+            leftNumber * occurrences
+        }
+    }
+}
+
 fun main() {
-    fun part1(input: List<String>): Int {
-        return input.size
-    }
+    val day01 = Day01()
 
-    fun part2(input: List<String>): Int {
-        return input.size
-    }
+    // Part One
+    val totalDistance = day01.calculateTotalDistance("input_day_1.txt")
+    println("Total distance: $totalDistance")
 
-    // Test if implementation meets criteria from the description, like:
-    check(part1(listOf("test_input")) == 1)
-
-    // Or read a large test input from the `src/Day01_test.txt` file:
-    val testInput = readInput("Day01_test")
-    check(part1(testInput) == 1)
-
-    // Read the input from the `src/Day01.txt` file.
-    val input = readInput("Day01")
-    part1(input).println()
-    part2(input).println()
+    // Part Two
+    val similarityScore = day01.calculateSimilarityScore("input_day_1.txt")
+    println("Similarity score: $similarityScore")
 }
