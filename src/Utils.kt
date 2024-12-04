@@ -15,6 +15,15 @@ fun String.md5() = BigInteger(1, MessageDigest.getInstance("MD5").digest(toByteA
     .toString(16)
     .padStart(32, '0')
 
+fun readInputTo2DArray(name: String): Array<CharArray> {
+    return Path("src/resources/$name.txt")
+        .readText()
+        .trim()
+        .lines()
+        .map { it.toCharArray() }
+        .toTypedArray()
+}
+
 /**
  * The cleaner shorthand for printing output.
  */
