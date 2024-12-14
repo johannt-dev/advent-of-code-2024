@@ -28,3 +28,14 @@ fun readInputTo2DArray(name: String): Array<CharArray> {
  * The cleaner shorthand for printing output.
  */
 fun Any?.println() = println(this)
+
+/*
+* read input to 1D char array
+ */
+fun readInputToCharArray(name: String): List<String> {
+    return Path("src/resources/$name.txt")
+        .readText()
+        .trim()
+        .split("")
+        .filter { it.isNotEmpty() } // Remove empty strings
+}
