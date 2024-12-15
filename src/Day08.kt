@@ -79,6 +79,8 @@ fun calcAntinodes(antennas: List<Triple<Char, Int, Int>>, mapSizeX: Int, mapSize
 fun calcAntinodesInLine(antennas: List<Triple<Char, Int, Int>>, mapSizeX: Int, mapSizeY: Int): List<Pair<Int, Int>> {
     val antinodePositions = mutableListOf<Pair<Int, Int>>()
 
+    fun gcd(a: Int, b: Int): Int = if (b == 0) a else gcd(b, a % b)
+
     for (i in antennas.indices) {
         for (j in i+1 until antennas.size) {
             val (freq1, x1, y1) = antennas[i]
@@ -122,4 +124,3 @@ fun countUniqueAntinodes(antinodes: List<Pair<Int, Int>>): Int {
     return antinodes.toSet().count()
 }
 
-fun gcd(a: Int, b: Int): Int = if (b == 0) a else gcd(b, a % b)
