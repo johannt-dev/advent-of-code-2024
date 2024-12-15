@@ -24,6 +24,16 @@ fun readInputTo2DArray(name: String): Array<CharArray> {
         .toTypedArray()
 }
 
+fun readInputTo2DIntList(name: String): List<List<Int>> {
+    return Path("src/resources/$name.txt")
+        .readText()
+        .trim()
+        .lines()
+        .map { line ->
+            line.map { it.digitToInt() }
+        }
+}
+
 /**
  * The cleaner shorthand for printing output.
  */
