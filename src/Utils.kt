@@ -34,6 +34,15 @@ fun readInputTo2DIntList(name: String): List<List<Int>> {
         }
 }
 
+fun readInputToBigIntList(name: String): List<BigInteger> {
+    return Path("src/resources/$name.txt")
+        .readText()
+        .trim()
+        .split(" ")
+        .filter { it.isNotEmpty() }
+        .map { BigInteger(it) }
+}
+
 /**
  * The cleaner shorthand for printing output.
  */
